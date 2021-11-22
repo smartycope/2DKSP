@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Parts/Tanks/Tank.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Parts/Tanks/ksp orange fuel tank.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Connection.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30.0389, 36.5681 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 15.0
+height = 40.0
+
+[node name="5mTank" type="RigidBody2D"]
+script = ExtResource( 1 )
+thumbnail = ExtResource( 2 )
+size = 5
+title = "5m Tank"
+
+[node name="TopConnection" type="Area2D" parent="."]
+position = Vector2( 0, -36.5377 )
+script = ExtResource( 3 )
+size = 5
+
+[node name="BottomConnection" type="Area2D" parent="."]
+position = Vector2( 0.629974, 34.6478 )
+script = ExtResource( 3 )
+size = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.458342, 0.458342 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0.561249, -26.9391 )
+rotation = 1.5708
+shape = SubResource( 2 )

@@ -1,0 +1,444 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/launchTower.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/ManualRocket.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/InSitu.gd" type="Script" id=3]
+[ext_resource path="res://Assets/grass.png" type="Texture" id=4]
+[ext_resource path="res://Assets/mountain.png" type="Texture" id=5]
+[ext_resource path="res://Assets/cutsy cityscape.png" type="Texture" id=6]
+[ext_resource path="res://Assets/ruler.jpeg" type="Texture" id=7]
+[ext_resource path="res://Assets/stars.png" type="Texture" id=8]
+[ext_resource path="res://Assets/clouds1.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 573.001, 15.9635 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 29.2564, 212.512 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 266.764, 23.05 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.604027, 1 )
+colors = PoolColorArray( 0.554688, 0.780823, 1, 1, 0.174969, 0.2463, 0.315436, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "cloud movementy"
+length = 120.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 60.2, 118.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2014.66, -833.189 ), Vector2( -150, -833.189 ), Vector2( -2014.66, -833.189 ) ]
+}
+
+[node name="InSitu" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 330.257, 571.485, 232.387 ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="RocketStartPos" type="Position2D" parent="."]
+position = Vector2( 508.876, 551.671 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Rocket" parent="." instance=ExtResource( 2 )]
+position = Vector2( 508.707, 549.113 )
+
+[node name="Camera" type="Camera2D" parent="Rocket"]
+offset = Vector2( 0, -270 )
+current = true
+process_mode = 0
+limit_bottom = 600
+limit_smoothed = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="GUILayer"]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -855.0
+margin_bottom = 140.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="GUILayer/MarginContainer"]
+margin_right = 159.0
+margin_bottom = 158.0
+columns = 2
+
+[node name="Label" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_right = 84.0
+margin_bottom = 14.0
+text = "Altitude: "
+
+[node name="altitude" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_right = 130.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="Label3" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "Attitude:"
+
+[node name="attitude" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 18.0
+margin_right = 130.0
+margin_bottom = 32.0
+text = "0°"
+
+[node name="Label4" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 84.0
+margin_bottom = 50.0
+text = "Velocity:"
+
+[node name="velocity" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 36.0
+margin_right = 130.0
+margin_bottom = 50.0
+text = "0 m/s"
+
+[node name="Label6" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 54.0
+margin_right = 84.0
+margin_bottom = 68.0
+text = "Acceleration:"
+
+[node name="acceleration" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 54.0
+margin_right = 130.0
+margin_bottom = 68.0
+text = "0 m/s²"
+
+[node name="Label8" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 72.0
+margin_right = 84.0
+margin_bottom = 86.0
+text = "∆Delta V"
+
+[node name="deltav" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 72.0
+margin_right = 130.0
+margin_bottom = 86.0
+text = "0 m/s"
+
+[node name="Label9" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 90.0
+margin_right = 84.0
+margin_bottom = 104.0
+text = "Throttle:"
+
+[node name="throttle" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 90.0
+margin_right = 130.0
+margin_bottom = 104.0
+text = "0"
+
+[node name="Label10" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 108.0
+margin_right = 84.0
+margin_bottom = 122.0
+text = "TWR: "
+
+[node name="twr" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 108.0
+margin_right = 130.0
+margin_bottom = 122.0
+text = "1"
+
+[node name="Label11" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 126.0
+margin_right = 84.0
+margin_bottom = 140.0
+text = "Thrust:"
+
+[node name="thrust" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 126.0
+margin_right = 130.0
+margin_bottom = 140.0
+text = "1"
+
+[node name="Label12" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_top = 144.0
+margin_right = 84.0
+margin_bottom = 158.0
+text = "Gravity:"
+
+[node name="gravity" type="Label" parent="GUILayer/MarginContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 144.0
+margin_right = 130.0
+margin_bottom = 158.0
+text = "1g"
+
+[node name="Boundaries" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Boundaries"]
+margin_left = -720.183
+margin_top = 237.513
+margin_right = -567.183
+margin_bottom = 251.513
+rect_scale = Vector2( 3.60903, 6.11437 )
+text = "DONT LOOK OVER HERE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Boundaries"]
+margin_left = 1243.08
+margin_top = 260.166
+margin_right = 1396.08
+margin_bottom = 274.166
+rect_scale = Vector2( 3.60903, 6.11437 )
+text = "DONT LOOK OVER HERE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Boundaries"]
+margin_left = 1381.9
+margin_top = -1742.09
+margin_right = 1534.9
+margin_bottom = -1728.09
+rect_scale = Vector2( 3.60903, 6.11437 )
+text = "DONT LOOK OVER HERE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="Boundaries"]
+margin_left = -817.917
+margin_top = -1672.68
+margin_right = -664.917
+margin_bottom = -1658.68
+rect_scale = Vector2( 3.60903, 6.11437 )
+text = "DONT LOOK OVER HERE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="Boundaries"]
+margin_left = 324.25
+margin_top = -2388.56
+margin_right = 477.25
+margin_bottom = -2374.56
+rect_scale = Vector2( 3.60903, 6.11437 )
+text = "This is Space"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ParallaxBackground" parent="."]
+layer = -1
+follow_viewport_enable = true
+
+[node name="Sky" type="ColorRect" parent="Background"]
+visible = false
+margin_left = -460.0
+margin_top = -342.0
+margin_right = 1507.0
+margin_bottom = 609.0
+color = Color( 0.592157, 0.858824, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grass" type="StaticBody2D" parent="Background"]
+position = Vector2( -44.9492, 585.838 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Background/Grass"]
+visible = false
+margin_right = 1139.0
+margin_bottom = 40.0
+color = Color( 0.337255, 0.784314, 0.286275, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Grass"]
+position = Vector2( 569.357, 17.9797 )
+shape = SubResource( 1 )
+
+[node name="LaunchTower" type="StaticBody2D" parent="Background"]
+position = Vector2( 711.555, 340.386 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LaunchTower"]
+position = Vector2( 37.4576, 1.49831 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Background/LaunchTower"]
+scale = Vector2( 0.547568, 0.73042 )
+texture = ExtResource( 1 )
+
+[node name="LaunchPad" type="StaticBody2D" parent="Background"]
+position = Vector2( 270.504, 555.339 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LaunchPad"]
+position = Vector2( 264.961, 24.0528 )
+shape = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Background/LaunchPad"]
+margin_left = -2.24744
+margin_right = 531.753
+margin_bottom = 48.0
+color = Color( 0.388235, 0.388235, 0.388235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grass" type="ParallaxBackground" parent="."]
+layer = -50
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Grass"]
+position = Vector2( -9.3109, 238.977 )
+motion_scale = Vector2( 1, 0.8 )
+
+[node name="TextureRect" type="TextureRect" parent="Grass/ParallaxLayer"]
+margin_right = 1053.0
+margin_bottom = 392.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Town" type="ParallaxBackground" parent="."]
+layer = -75
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Town"]
+position = Vector2( 6.18378, 378.354 )
+motion_scale = Vector2( 1, 0.04 )
+motion_offset = Vector2( 0, -270 )
+
+[node name="TextureRect" type="TextureRect" parent="Town/ParallaxLayer"]
+margin_right = 575.0
+margin_bottom = 208.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mountains" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Mountains"]
+position = Vector2( -9.43875, -13.2142 )
+motion_scale = Vector2( 1, 0.01 )
+motion_offset = Vector2( 0, -270 )
+
+[node name="TextureRect" type="TextureRect" parent="Mountains/ParallaxLayer"]
+margin_left = -70.0
+margin_right = 1113.0
+margin_bottom = 597.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ruler" type="Sprite" parent="Mountains/ParallaxLayer"]
+visible = false
+position = Vector2( 27.8443, 39.2583 )
+rotation = 1.56946
+texture = ExtResource( 7 )
+
+[node name="Sky" type="ParallaxBackground" parent="."]
+layer = -105
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Sky"]
+position = Vector2( -1.68179, -48.772 )
+motion_scale = Vector2( 1, 0.001 )
+
+[node name="TextureRect" type="TextureRect" parent="Sky/ParallaxLayer"]
+margin_left = -143.0
+margin_top = 625.0
+margin_right = 2647.0
+margin_bottom = 1982.0
+rect_rotation = -90.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" type="ParallaxBackground" parent="."]
+layer = -103
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Stars"]
+position = Vector2( -1.68179, -48.772 )
+motion_scale = Vector2( 1, 0.001 )
+
+[node name="TextureRect" type="TextureRect" parent="Stars/ParallaxLayer"]
+margin_left = -194.572
+margin_top = -2168.67
+margin_right = 1305.43
+margin_bottom = -668.674
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clouds" type="ParallaxBackground" parent="."]
+layer = -103
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Clouds"]
+position = Vector2( -1.68179, -48.772 )
+motion_scale = Vector2( 1, 0.001 )
+
+[node name="TextureRect" type="TextureRect" parent="Clouds/ParallaxLayer"]
+margin_left = -1903.11
+margin_top = -595.869
+margin_right = 1321.89
+margin_bottom = -12.8693
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Clouds/ParallaxLayer/TextureRect"]
+autoplay = "cloud movementy"
+"anims/cloud movementy" = SubResource( 6 )

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Parts/Engines/Engine.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Parts/Engines/animated rocket engine.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Connection.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 35.7275
+height = 68.0
+
+[node name="RaptorEngine" type="RigidBody2D"]
+mass = 84.07
+script = ExtResource( 1 )
+thumbnail = ExtResource( 2 )
+size = 5
+title = "Raptor Engine"
+thrust_kn = 10000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.262669, 0.240358 )
+texture = ExtResource( 2 )
+
+[node name="Connection" type="Area2D" parent="."]
+position = Vector2( -0.793701, -42.8598 )
+script = ExtResource( 3 )
+size = 5
